@@ -37,7 +37,7 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
-        kotlinCompilerVersion '1.4.20'
+        kotlinCompilerVersion '1.4.21'
     }
 }
 
@@ -122,9 +122,9 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
     //Chucker
-    def Chuckerversion = "3.4.0"
-    implementation "com.github.chuckerteam.chucker:library:$Chuckerversion"
-    implementation "com.github.chuckerteam.chucker:library-no-op:$Chuckerversion"
+//    def Chuckerversion = "3.4.0"
+//    implementation "com.github.chuckerteam.chucker:library:$Chuckerversion"
+//    implementation "com.github.chuckerteam.chucker:library-no-op:$Chuckerversion"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

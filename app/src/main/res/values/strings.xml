@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">NewzCompose</string>
+
+    <string name="select_category">Select a news category</string>
+    <string name="all">All news</string>
+    <string name="business">Business</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="health">Health</string>
+    <string name="science">Science</string>
+    <string name="technology">Tech</string>
+    <string name="sport">Sports</string>
+    <string name="select_another_category">Another Sheet</string>
+    <string name="menu_hot">Top</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_source">Sources</string>
+
+    <string name="select_country">Select a country</string>
+    <string name="united_kingdom">UK</string>
+    <string name="usa">USA</string>
+    <string name="pakistan">Pakistan</string>
+    <string name="france">France</string>
+    <string name="germany">Germany</string>
+    <string name="australia">Australia</string>
+    <string name="china">China</string>
+    <string name="japan">Japan</string>
+    <string name="canada">Canada</string>
+    <string name="south_africa">South Africa</string>
+    <string name="ireland">Ireland</string>
+    <string name="brazil">Brazil</string>
+    <string name="hong_kong">Hong Kong</string>
+    <string name="unsupported">Unsupported</string>
 </resources>
