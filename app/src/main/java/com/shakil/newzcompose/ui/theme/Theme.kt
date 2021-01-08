@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.onCommit
 import androidx.compose.ui.graphics.Color
 import com.shakil.newzcompose.util.SysUiController
+import okhttp3.internal.wait
 
 
 //private val DarkColorPalette = darkColors(
@@ -37,6 +38,8 @@ private val DarkColorPalette = darkColors(
         onPrimary = Color.Black,
         secondary = Yellow400,
         onSecondary = Color.Black,
+        background = Color.Black,
+        surface =  Color.Black,
         onSurface = Color.White,
         onBackground = Color.White,
         error = Red300,
@@ -49,6 +52,8 @@ private val LightColorPalette = lightColors(
         onPrimary = Color.White,
         secondary = Yellow700,
         secondaryVariant = Yellow800,
+        background = Color.White,
+        surface =  Color.White,
         onSecondary = Color.Black,
         onSurface = Color.Black,
         onBackground = Color.Black,

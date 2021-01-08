@@ -3,6 +3,7 @@ package com.shakil.newzcompose.ui.headline.item
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -145,9 +146,12 @@ private fun shareArticle(article: Article, context: Context) {
     context.startActivity(Intent.createChooser(intent, "Share Article"))
 }
 
-private fun openArticle(article: Article, context: Context) {
-    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
-    context.startActivity(intent)
+fun openArticle(article: Article, context: Context) {
+//    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
+//    context.startActivity(intent)
+    val builder = CustomTabsIntent.Builder()
+    val customTabsIntent :CustomTabsIntent  = builder.build();
+    customTabsIntent.launchUrl(context, Uri.parse(article.url))
 }
 
 private fun formatTimeSincePublished(date: Date): String {

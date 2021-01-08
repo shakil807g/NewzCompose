@@ -121,6 +121,9 @@ dependencies {
     //Logging
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
+    //Chrome custom tabs
+    implementation 'androidx.browser:browser:1.3.0'
+
     //Chucker
 //    def Chuckerversion = "3.4.0"
 //    implementation "com.github.chuckerteam.chucker:library:$Chuckerversion"
