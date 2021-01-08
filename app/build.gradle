@@ -14,7 +14,10 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def apiKey = properties.getProperty("api_key")
+        buildConfigField("String", "API_KEY", apiKey)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
