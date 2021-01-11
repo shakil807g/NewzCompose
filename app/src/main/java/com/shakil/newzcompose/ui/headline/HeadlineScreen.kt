@@ -1,6 +1,7 @@
 package com.shakil.newzcompose.ui.headline
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -46,9 +47,8 @@ fun HeadlineScreen(headlinesViewModel: MainViewModel) {
         ) {
             LazyColumn(
                 state = feedListState,
-                contentPadding = AmbientWindowInsets.current.systemBars
-                    .toPaddingValues()
-                    .add(start = 8.dp,top = 16.dp,bottom = 68.dp,end = 8.dp)
+                contentPadding = AmbientWindowInsets.current.systemBars.toPaddingValues()
+                    .add(start = 8.dp,end = 8.dp)
             ) {
 
                 //item { headerItem() }
@@ -117,6 +117,22 @@ fun HeadlineScreen(headlinesViewModel: MainViewModel) {
             ) {
                 Icon(imageVector = Icons.Outlined.Settings)
             }
+
+            Spacer(
+                Modifier
+                    .align(Alignment.TopCenter)
+                    .background(MaterialTheme.colors.surface.copy(alpha = 0.4f))
+                    .statusBarsHeight() // Match the height of the status bar
+                    .fillMaxWidth()
+            )
+
+            Spacer(
+                Modifier
+                    .align(Alignment.BottomCenter)
+                    .background(Color.Black.copy (alpha = 0.4f))
+                    .navigationBarsHeight() // Match the height of the status bar
+                    .fillMaxWidth()
+            )
         }
 
     }

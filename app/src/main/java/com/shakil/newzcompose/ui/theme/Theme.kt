@@ -69,13 +69,15 @@ fun NewzComposeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Compo
         LightColorPalette
     }
 
-    val sysUiController = SysUiController.current
-    onCommit(sysUiController, colors.background) {
-        sysUiController.setSystemBarsColor(
-                color = colors.background.copy(alpha = AlphaNearOpaque),
-                darkIcons = true
-        )
-    }
+//    val sysUiController = SysUiController.current
+//    onCommit(sysUiController, colors.background) {
+//        sysUiController.setSystemBarsColor(
+//                color = colors.background.copy(alpha = AlphaNearOpaque),
+//                darkIcons = true
+//        )
+//    }
+
+
 
     MaterialTheme(
             colors = colors,

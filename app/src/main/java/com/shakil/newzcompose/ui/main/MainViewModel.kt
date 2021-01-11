@@ -7,12 +7,15 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.shakil.newzcompose.domain.model.*
 import com.shakil.newzcompose.domain.repository.NewsRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import java.util.*
 
 
@@ -35,7 +38,7 @@ class MainViewModel @ViewModelInject constructor(
      val topHeadlines: Flow<PagingData<Article>> =
              newsSelection.flatMapLatest {
                  newsRepository.topNewsHeadlines(it)
-             }.shareIn(viewModelScope, SharingStarted.Lazily,1)
+             }.cachedIn(viewModelScope)
 
 
     fun setNewsCategory(newsCategory: NewsCategory) {

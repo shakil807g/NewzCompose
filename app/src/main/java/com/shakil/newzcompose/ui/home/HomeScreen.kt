@@ -34,10 +34,10 @@ sealed class BottomNavigationScreens(val route: String, @StringRes val resourceI
 @Composable
 fun HomeScreen(headlinesViewModel: MainViewModel) {
     val navController = rememberNavController()
-//    with(SysUiController.current) {
-//        setStatusBarColor(Color.Transparent, darkIcons = !isSystemInDarkTheme())
-//        setNavigationBarColor(Color.Transparent, darkIcons = !isSystemInDarkTheme())
-//    }
+    with(SysUiController.current) {
+        setStatusBarColor(Color.Transparent, darkIcons = !isSystemInDarkTheme())
+        setNavigationBarColor(Color.Transparent, darkIcons = !isSystemInDarkTheme())
+    }
     val bottomNavigationItems = listOf(
             BottomNavigationScreens.Top,
             BottomNavigationScreens.Search,

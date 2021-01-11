@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shakil.newzcompose">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".NewzApp"
         android:allowBackup="true"
@@ -10,10 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NewzCompose">
+        <activity android:name=".ui.edgetoedge.EdgeToEdgeActivity"
+            android:theme="@style/Theme.NewzCompose.NoActionBar.TransparentBars">
+        </activity>
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.NewzCompose.NoActionBar">
+            android:theme="@style/Theme.NewzCompose.NoActionBar.TransparentBars">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

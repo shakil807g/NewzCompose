@@ -31,4 +31,5 @@
     <string name="unsupported">Unsupported</string>
 
     <string name="loading_error">Can\'t load the latest news. Check your internet.</string>
+    <string name="insets_title_list">Insets: Edge-to-edge list</string>
 </resources>

@@ -38,7 +38,7 @@ fun SelectAnotherBottomSheet(
                 .align(Alignment.CenterHorizontally)
                 .padding(12.dp),
             style = MaterialTheme.typography.h6,
-            text = stringResource(id = R.string.select_another_category)
+            text = stringResource(id = R.string.select_category)
         )
         Divider()
         Spacer(modifier = Modifier.height(16.dp))
