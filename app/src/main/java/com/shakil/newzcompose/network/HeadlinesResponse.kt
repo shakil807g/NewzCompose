@@ -26,6 +26,7 @@ data class NewsArticle(
 data class NewsSource(
     @field:Json(name ="id") val id: String? = null,
     @field:Json(name ="name") val name: String? = null
+
 )
 
 fun NewsSource.toDomain() : Source {

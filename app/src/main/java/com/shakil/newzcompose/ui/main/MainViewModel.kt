@@ -7,15 +7,16 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import com.shakil.newzcompose.domain.model.Article
-import com.shakil.newzcompose.domain.model.Country
-import com.shakil.newzcompose.domain.model.HeadlinesPagingKey
-import com.shakil.newzcompose.domain.model.NewsCategory
+import com.shakil.newzcompose.domain.model.*
 import com.shakil.newzcompose.domain.repository.NewsRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.util.*
 
+
+private const val TAG = "MainViewModel"
 class MainViewModel @ViewModelInject constructor(
         private val newsRepository: NewsRepository,
         @Assisted private val savedStateHandle: SavedStateHandle
@@ -32,7 +33,9 @@ class MainViewModel @ViewModelInject constructor(
 
      @ExperimentalCoroutinesApi
      val topHeadlines: Flow<PagingData<Article>> =
-             newsSelection.flatMapLatest { newsRepository.topNewsHeadlines(it) }
+             newsSelection.flatMapLatest {
+                 newsRepository.topNewsHeadlines(it)
+             }.shareIn(viewModelScope, SharingStarted.Lazily,1)
 
 
     fun setNewsCategory(newsCategory: NewsCategory) {
@@ -41,5 +44,16 @@ class MainViewModel @ViewModelInject constructor(
 
     fun setCountry(country : Country) {
         newsSelection.value = newsSelection.value.copy(country = country)
+    }
+
+
+    fun someFakeArticles() = flow {
+        val list = listOf<Article>(
+            Article(Source("1","asdasd"),"adsadas","dsdsdsdsd","asdadasd",
+                "sdsdsdsd", "",Date()),
+            Article(Source("1","asdasd"),"adsadas","dsdsdsdsd","asdadasd",
+                "sdsdsdsd", "",Date()))
+        delay(4000)
+        emit(list)
     }
 }

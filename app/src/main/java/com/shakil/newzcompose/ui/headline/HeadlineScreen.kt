@@ -50,6 +50,7 @@ fun HeadlineScreen(headlinesViewModel: MainViewModel) {
                     .toPaddingValues()
                     .add(start = 8.dp,top = 16.dp,bottom = 68.dp,end = 8.dp)
             ) {
+
                 //item { headerItem() }
 
                 when (val refreshState = lazyPagingItems.loadState.refresh) {
