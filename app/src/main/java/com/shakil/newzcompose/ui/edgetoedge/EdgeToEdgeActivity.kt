@@ -1,0 +1,148 @@
+package com.shakil.newzcompose.ui.edgetoedge
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.contentColorFor
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.primarySurface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.AmbientDensity
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
+import com.shakil.newzcompose.R
+import com.shakil.newzcompose.ui.NewzComposeTheme
+import dev.chrisbanes.accompanist.insets.AmbientWindowInsets
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
+import dev.chrisbanes.accompanist.insets.add
+import dev.chrisbanes.accompanist.insets.navigationBarsPadding
+import dev.chrisbanes.accompanist.insets.statusBarsPadding
+import dev.chrisbanes.accompanist.insets.toPaddingValues
+
+class EdgeToEdgeActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Turn off the decor fitting system windows, which means we need to through handling
+        // insets
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        setContent {
+            NewzComposeTheme {
+                Surface {
+                    Sample()
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalStdlibApi::class)
+@Composable
+private fun Sample() {
+    ProvideWindowInsets {
+        Surface {
+            Box(Modifier.fillMaxSize()) {
+                // A state instance which allows us to track the size of the top app bar
+                var topAppBarSize by remember { mutableStateOf(0) }
+
+                // We use the systemBar insets as the source of our content padding.
+                // We add on the topAppBarSize, so that the content is displayed below
+                // the app bar. Since the top inset is already contained within the app
+                // bar height, we disable handling it in toPaddingValues().
+                LazyColumn(
+                    contentPadding = AmbientWindowInsets.current.systemBars
+                        .toPaddingValues(top = false)
+                        .add(top = with(AmbientDensity.current) { topAppBarSize.toDp() })
+                ) {
+                    items(items = listItems) { imageUrl ->
+                        ListItem(imageUrl, Modifier.fillMaxWidth())
+                    }
+                }
+
+                /**
+                 * We show a translucent app bar above which floats about the content. Our
+                 * [InsetAwareTopAppBar] below automatically draws behind the status bar too.
+                 */
+                InsetAwareTopAppBar(
+                    title = { Text(stringResource(R.string.insets_title_list)) },
+                    backgroundColor = MaterialTheme.colors.surface.copy(alpha = 0.9f),
+                    modifier = Modifier.fillMaxWidth()
+                        // We use onSizeChanged to track the app bar height, and update
+                        // our state above
+                        .onSizeChanged { topAppBarSize = it.height }
+                )
+
+                FloatingActionButton(
+                    onClick = { /* TODO */ },
+                    modifier = Modifier.align(Alignment.BottomEnd)
+                        .navigationBarsPadding()
+                        .padding(16.dp)
+                ) {
+                    Icon(Icons.Default.Face)
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalStdlibApi::class)
+private val listItems = buildList {
+    repeat(40) {
+        add(randomSampleImageUrl(it))
+    }
+}
+
+/**
+ * A wrapper around [TopAppBar] which uses [Modifier.statusBarsPadding] to shift the app bar's
+ * contents down, but still draws the background behind the status bar too.
+ */
+@Composable
+fun InsetAwareTopAppBar(
+    title: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    navigationIcon: @Composable (() -> Unit)? = null,
+    actions: @Composable RowScope.() -> Unit = {},
+    backgroundColor: Color = MaterialTheme.colors.primarySurface,
+    contentColor: Color = contentColorFor(backgroundColor),
+    elevation: Dp = 4.dp
+) {
+    Surface(
+        color = backgroundColor,
+        elevation = elevation,
+        modifier = modifier
+    ) {
+        TopAppBar(
+            title = title,
+            navigationIcon = navigationIcon,
+            actions = actions,
+            backgroundColor = Color.Transparent,
+            contentColor = contentColor,
+            elevation = 0.dp,
+            modifier = Modifier.statusBarsPadding()
+        )
+    }
+}
