@@ -13,7 +13,7 @@ NewzCompose is an android app showing a simple news feed based on modern Android
 Go to the [Releases](https://github.com/shakil807g/NewzCompose/releases) to download the latest APK.
 
 ## Screenshots
-<p align="center">
+<p align="left">
 <img src="/demo/device-2021-01-11-125210.gif" width="32%"/>
 </p>
 
